@@ -2,7 +2,7 @@
 
 var term_to_binary = require('../api');
 
-//require('sys').puts(exports.term_to_binary(5));
+//require('util').puts(exports.term_to_binary(5));
 var t = [                          // array
         , ['two', 'array']         // Innocent 2-array
         , "ABCDE"                  // string (char list, encoded as STRING)
