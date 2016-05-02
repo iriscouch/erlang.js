@@ -73,6 +73,9 @@ var Encoder = function() {
       // Encode the array as a tuple.
       return self.tuple(val);
 
+    if((tag === 'pid' || tag === 'p') && valType === 'object')
+      return self.pid(val);
+
     throw new Error("Unknown tag " + tag.toString() + " for value: " + sys.inspect(val));
   }
 
@@ -94,6 +97,16 @@ var Encoder = function() {
 
     result.push(x.map(function(e) { return self.encode(e) }));
     return result;
+  }
+
+  self.pid = function(x) {
+    return [
+      lib.tags.PID,
+      self.encode(x.node),
+      lib.uint32(x.id),
+      lib.uint32(x.serial),
+      x.creation
+    ];
   }
 
   self.buffer = function(x) {
